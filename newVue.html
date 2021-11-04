@@ -2,49 +2,48 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Vue Mastery</title>
-  <!-- Import Styles -->
-  <link rel="stylesheet" href="./assets/styles.css" />
-  <!-- Import Vue.js -->
-  <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
-</head>
+    <meta charset="UTF-8" />
+    <title>Vue Mastery</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="nav-bar"></div>
+      
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <img v-bind:src="image">
+          </div>
+          <div class="product-info">
+            <h1>{{ product }}</h1>
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
 
-<body>
-  <div id="app">
-    <div class="nav-bar"></div>
-
-    <div class="product-display">
-      <div class="product-container">
-        <div class="product-image">
-          <!-- image goes here use v-bind:src -->
-          <img :src="image">
+            
+            <ul>
+              <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+            <!-- Adding sizes to the data object to display them in a list -->
+             <ul>
+              <li v-for="(size, index) in sizes" :key="index">{{ size }}</li>
+            </ul>
+            <!-- Print out variant colors -->
+            <div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+          </div>
         </div>
-        <div class="product-info">
-          <h1>{{ product }}</h1>
-          <!-- Conditional Rendering -->
-          <!-- <p v-show="onSale">On Sale</p> -->
-          
-
-          <p v-if="inventory > 10">In Stock</p>
-          <p v-else-if="inventory <= 10 && inventory > 0"> Low Inventory</p> 
-          <!-- mountedApp.inventory = 8; -->
-          <p v-else>Out of Stock</p>
-          <p>{{ description }}</p> 
-          <a :href="url">click-me</a>
-
-        </div>
-
       </div>
     </div>
-  </div>
-  <!-- Import App -->
-  <script src="./vueAction.js"></script>
+    <!-- Import App -->
+    <script src="./vueAction.js"></script>
 
-  <!-- Mount App -->
-  <script>
-    const mountedApp = app.mount('#app')
-  </script>
+    <!-- Mount App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
 </body>
 
 </html>
