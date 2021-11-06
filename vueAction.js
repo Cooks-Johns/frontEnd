@@ -1,11 +1,13 @@
 const app = Vue.createApp({
     data() {
         return {
+            myStore:'Flash Sale',
             cart:0,
             product: 'Socks',
             image: './assets/images/socks_green.jpg',
-            inStock: true,
+            inStock: 0,
             details: ['50% cotton', '30% wool', '20% polyester'],
+            activeClass: true,
 
             // Lets you toggle between differen 
             variants: [
