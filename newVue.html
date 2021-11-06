@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Vue Mastery</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="nav-bar">
+        <h1>{{ myStore }}</h1>
+      </div>
+
+      <div class="cart">Cart({{ cart }})</div>
+      
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+
+            <!-- MYTH
+              -->
+            <img 
+            :class="{ 'out-of-stock-img': !inStock }"
+            v-bind:src="image">
+          </div>
+          <div class="product-info">
+            <h2>{{ product }}</h2>
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
+            <ul>
+              <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+
+            <!-- MYTH
+              This is another way to add a event Listner the key looks at the id and 
+                 upon the mouseOver event  --
+             .color-circle: in css file 50/50 circle --
+            variant.color: using this will display only the color name 
+              by binding backgroundColor: with the style attribute we are able
+              to style the variant div to display the color/style of our css/js of that iteration
+            :class="[isActive ? activeClass : '']"
+          -->
+            <div v-for="variant in variants" 
+            :key="variant.id" 
+            @mouseover="updateImage(variant.image)"
+            class="color-circle" 
+            :class="[isActive ? activeClass : '']" 
+            :style="{ backgroundColor: variant.color }">
+            <!-- {{ variant.color }} -->
+          </div>
+
+            <!-- MYTH
+              When adding a event listener use the v-on: and when the event happens the 
+                 method will call on addToCart with run 
+              :disabled="!inStock" - user cannot add to cart if inventory is zero
+              :class="{ disabledButton: !inStock }" - Using the shorthand for vbind on the
+                 class object we are able to Greys out our button when out of stock
+                 -- test mountedApp.inStock = true
+            -->
+            <button 
+            class="button" 
+            :class="{ disabledButton: !inStock }" 
+            :disabled="!inStock"
+            v-on:click="addToCart">
+              Add to Cart
+            </button>
+
+            <!-- MYTH
+              This does the same as the button above but removes and item from the cart but
+                 with the use of the @ does the same as v-on:click -->
+            <button 
+            class="button" 
+            @click="removeFromCart">
+              Remove item
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Import App -->
+    <script src="./vueAction.js"></script>
+
+    <!-- Mount App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>
