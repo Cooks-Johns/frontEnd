@@ -9,6 +9,7 @@ const app = Vue.createApp({
             details: ['50% cotton', '30% wool', '20% polyester'],
             activeClass: true,
 
+            
             // Lets you toggle between differen 
             variants: [
               { id: 2234, color: 'green', image: './assets/images/socks_green.jpg' },
